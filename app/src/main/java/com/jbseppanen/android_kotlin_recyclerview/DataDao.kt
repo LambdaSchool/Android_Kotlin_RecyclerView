@@ -14,7 +14,7 @@ object DataDao {
         NetworkAdapter.httpRequest(API_URL, NetworkAdapter.GET, "", object : NetworkAdapter.NetworkCallback {
             override fun returnResult(success: Boolean?, result: String) {
                 if (success == true) {
-                    val diversion = Json.parse(Diversion.serializer(), result)
+                    val diversion = Json.nonstrict.parse(Diversion.serializer(), result)
                     callback.callback(diversion)
                 }
             }

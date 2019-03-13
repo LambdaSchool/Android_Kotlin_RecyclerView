@@ -1,6 +1,5 @@
 package com.jbseppanen.android_kotlin_recyclerview
 
-import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 
 @Serializable

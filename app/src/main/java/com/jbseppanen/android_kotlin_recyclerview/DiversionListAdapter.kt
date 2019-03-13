@@ -16,8 +16,13 @@ class DiversionListAdapter(val activity: Activity) : RecyclerView.Adapter<Recycl
 
     val data = mutableListOf<Diversion>()
 
+
     init {
-        for (i in 0..15) {
+        getItems(15)
+    }
+
+    fun getItems(qtyToGet: Int) {
+        for (i in 0..qtyToGet) {
             DataDao.getDiversions(object : DataDao.DataCallback {
                 override fun callback(diversion: Diversion) {
                     data.add(diversion)
@@ -32,11 +37,20 @@ class DiversionListAdapter(val activity: Activity) : RecyclerView.Adapter<Recycl
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, index: Int) {
+        if (index == data.size - 5) {
+            getItems(5)
+        }
+
         val element = data[index]
         val diversionHolder = viewHolder as DiversionItemViewHolder
 
         diversionHolder.diversionNameView.text = element.activity
-        diversionHolder.diversionPriceView.text = "$ ${element.price}"
+        val cost: String = when {
+            element.price!! < .333 -> "$"
+            element.price < .666 -> "$$"
+            else -> "$$$"
+        }
+        diversionHolder.diversionPriceView.text = cost
     }
 
     override fun getItemCount(): Int {
