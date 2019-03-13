@@ -9,7 +9,7 @@ data class CardsList(val cards: List<Card>?)
 data class Card(
     val name: String? = "",
     val manaCost: String? = "",
-    val cmc: Number? = -1,
+    val cmc: String? = "",
     val colors: List<String>? = listOf(String()),
     val colorIdentity: List<String>? = listOf(String()),
     val type: String? = "",
@@ -19,19 +19,20 @@ data class Card(
     val rarity: String? = "",
     val set: String? = "",
     val setName: String? = "",
-    val text: String? = "",
+    //val text: String? = "",
+    val flavor: String? = "",
     val artist: String? = "",
     val number: String? = "",
     val power: String? = "",
     val toughness: String? = "",
     val layout: String? = "",
-    val multiverseid: Number? = -1,
+    val multiverseid: Int? = -1,
     val imageUrl: String? = "",
-    val variations: List<String>? = listOf(String()),
+    //val variations: List<String>? = listOf(String()),
     val rulings: List<Any>? =  listOf(Any()),
     val foreignNames: List<ForeignName>? = listOf(ForeignName()),
     val printings: List<String>? = listOf(String()),
-    val originalText: String? = "",
+    //val originalText: String? = "",
     val originalType: String? = "",
     val legalities: List<Legalities>? = listOf(Legalities()),
     val id: String? = ""
@@ -44,7 +45,7 @@ data class ForeignName(
     val flavor: String? = "",
     val imageUrl: String? = "",
     val language: String? = "",
-    val multiverseid: Number? = -1
+    val multiverseid: Int? = -1
 )
 
 @Serializable
