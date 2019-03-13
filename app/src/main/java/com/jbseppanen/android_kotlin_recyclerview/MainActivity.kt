@@ -10,9 +10,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
         DataDao.getDiversions(object : DataDao.DataCallback {
             override fun callback(diversion: Diversion) {
-                runOnUiThread({findViewById<TextView>(R.id.test).setText(diversion.activity)})
+                runOnUiThread { findViewById<TextView>(R.id.test).text = diversion.activity }
             }
         })
 
