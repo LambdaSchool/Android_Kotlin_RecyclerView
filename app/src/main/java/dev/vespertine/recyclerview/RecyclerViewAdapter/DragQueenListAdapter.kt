@@ -1,5 +1,6 @@
 package dev.vespertine.recyclerview.RecyclerViewAdapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -28,8 +29,8 @@ class DragQueenListAdapter(val activity: Activity) : RecyclerView.Adapter<Recycl
     init {
         for (i in 0..10) {
             NoKeyNoShadeDAO.getQueens(object : NoKeyNoShadeDAO.QueensCallback {
-                override fun callBack(dragQueen: DragQueen) {
-                    queenList.add(dragQueen)
+                override fun callBack(dragQueen: List<DragQueen>) {
+                    queenList.addAll(dragQueen)
                     activity.runOnUiThread { notifyDataSetChanged() }
                 }
             })
@@ -42,13 +43,14 @@ class DragQueenListAdapter(val activity: Activity) : RecyclerView.Adapter<Recycl
         return DragQueenItemViewHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, index: Int) {
         val queen = queenList[index]
         val queenHolder = viewHolder as DragQueenItemViewHolder
-        queenHolder.queenName.append(queen.name)
-        queenHolder.queenQuote.append(queen.quote)
-        queenHolder.queenWin.append(queen.winner.toString())
-        queenHolder.queenCongen.append(queen.missCongeniality.toString())
+        queenHolder.queenName.text = "Name: " + queen.name
+        queenHolder.queenQuote.text = "Quote: " + queen.quote
+        queenHolder.queenWin.text = "Winnner? " + queen.winner.toString()
+        queenHolder.queenCongen.text = "Miss Congeniality? " + queen.missCongeniality.toString()
         Picasso.get()
             .load(queen.image_url)
             .into(queenHolder.queenImage)
