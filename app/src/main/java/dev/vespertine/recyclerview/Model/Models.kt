@@ -1,9 +1,13 @@
 package dev.vespertine.recyclerview.Model
 
+import kotlinx.serialization.Serializable
 
-data class DragQueen(val id: Number?,
-                          val name: String?,
-                          val winner: Boolean?,
-                          val missCongeniality: Boolean?,
-                          val image_url: String?,
-                          val quote: String?)
+
+@Serializable
+data class DragQueen(
+    val id: Int? = -1,
+    val name: String? = "",
+    val winner: Boolean? = false,
+    val missCongeniality: Boolean? = false,
+    val image_url: String? = "",
+    val quote: String? = "")
