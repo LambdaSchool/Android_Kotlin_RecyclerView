@@ -27,15 +27,12 @@ class DragQueenListAdapter(val activity: Activity) : RecyclerView.Adapter<Recycl
     }
 
     init {
-        for (i in 0..10) {
-            NoKeyNoShadeDAO.getQueens(object : NoKeyNoShadeDAO.QueensCallback {
-                override fun callBack(dragQueen: List<DragQueen>) {
-                    queenList.addAll(dragQueen)
-                    activity.runOnUiThread { notifyDataSetChanged() }
-                }
-            })
-        }
-
+        NoKeyNoShadeDAO.getQueens(object : NoKeyNoShadeDAO.QueensCallback {
+            override fun callBack(dragQueen: List<DragQueen>) {
+                queenList.addAll(dragQueen)
+                activity.runOnUiThread { notifyDataSetChanged() }
+            }
+        })
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
