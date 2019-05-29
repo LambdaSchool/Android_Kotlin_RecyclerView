@@ -44,9 +44,9 @@ class ListAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.Vi
         val element = data[index]
         val diversionHolder = viewHolder as BaseItemViewHolder
 
-        diversionHolder.diversionNameView.text = element.title
+        diversionHolder.diversionNameView.text = element.name
 
-        diversionHolder.diversionPriceView.text = element.source_url
+        diversionHolder.diversionPriceView.text = element.mission
     }
     override fun getItemCount(): Int = data.size
 
