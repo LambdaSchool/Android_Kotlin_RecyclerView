@@ -1,6 +1,20 @@
 package com.jakeesveld.kotlinrecyclerview
 
-@kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Base(val info: Info?, val results: List<Character>?)
+
+@Serializable
+data class Info(val count: Int?, val pages: Int?, val next: String?, val prev: String?)
+
+@Serializable
+data class Location(val name: String?, val url: String?)
+
+@Serializable
+data class Origin(val name: String?, val url: String?)
+
+@Serializable
 data class Character(
     val id: Int?,
     val name: String?,
@@ -15,9 +29,3 @@ data class Character(
     val url: String?,
     val created: String?
 )
-
-@kotlinx.serialization.Serializable
-data class Location(val name: String?, val url: String?)
-
-@kotlinx.serialization.Serializable
-data class Origin(val name: String?, val url: String?)

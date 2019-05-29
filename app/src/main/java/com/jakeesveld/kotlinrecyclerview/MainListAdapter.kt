@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.main_list_item.view.*
+import java.lang.Character
 
-class MainListAdapter(val dataList: List<Character>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainListAdapter(val dataList: List<com.jakeesveld.kotlinrecyclerview.Character>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     open class ViewHolder(view: View): RecyclerView.ViewHolder(view){
         val characterName: TextView = view.text_character_name
@@ -15,7 +16,7 @@ class MainListAdapter(val dataList: List<Character>): RecyclerView.Adapter<Recyc
         val characterGender: TextView = view.text_character_gender
         val characterStatus: TextView = view.text_character_status
 
-        fun bindModel(character: Character){
+        fun bindModel(character: com.jakeesveld.kotlinrecyclerview.Character){
             characterGender.text = character.gender
             characterName.text = character.name
             characterSpecies.text = character.species
@@ -30,7 +31,7 @@ class MainListAdapter(val dataList: List<Character>): RecyclerView.Adapter<Recyc
     override fun getItemCount(): Int = dataList.size
 
     override fun onBindViewHolder(vh: RecyclerView.ViewHolder, position: Int) {
-        val data: Character = dataList[position]
+        val data: com.jakeesveld.kotlinrecyclerview.Character = dataList[position]
         val holder = vh as ViewHolder
         holder.bindModel(data)
     }
