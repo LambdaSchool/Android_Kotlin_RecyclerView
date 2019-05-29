@@ -9,12 +9,12 @@ import android.widget.TextView
 
 class ListAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class DiversionItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val diversionNameView: TextView = view.findViewById(R.id.text_diversion_name)
-        val diversionPriceView: TextView = view.findViewById(R.id.text_diversion_price)
+    class BaseItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val diversionNameView: TextView = view.findViewById(R.id.text_recipe_name)
+        val diversionPriceView: TextView = view.findViewById(R.id.text_recipe_price)
     }
 
-    val data = mutableListOf<Diversion>()
+    val data = mutableListOf<Base>()
 
 
     init {
@@ -23,8 +23,8 @@ class ListAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.Vi
 
     fun getItems(qtyToGet: Int) {
         for (i in 0..qtyToGet) {
-            DataDao.getDiversions(object : DataDao.DataCallback {
-                override fun callback(diversion: Diversion) {
+            DataDao.getBases(object : DataDao.DataCallback {
+                override fun callback(diversion: Base) {
                     data.add(diversion)
                     activity.runOnUiThread { notifyDataSetChanged() }
                 }
@@ -33,7 +33,7 @@ class ListAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.Vi
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return DiversionItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.diversion_item_layout, parent, false))
+        return BaseItemViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.diversion_item_layout, parent, false))
     }
 
     override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, index: Int) {
@@ -42,15 +42,11 @@ class ListAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.Vi
         }
 
         val element = data[index]
-        val diversionHolder = viewHolder as DiversionItemViewHolder
+        val diversionHolder = viewHolder as BaseItemViewHolder
 
-        diversionHolder.diversionNameView.text = element.activity
-        val cost: String = when {
-            element.price!! < .333 -> "$"
-            element.price < .666 -> "$$"
-            else -> "$$$"
-        }
-        diversionHolder.diversionPriceView.text = cost
+        diversionHolder.diversionNameView.text = element.title
+
+        diversionHolder.diversionPriceView.text = element.source_url
     }
     override fun getItemCount(): Int = data.size
 
