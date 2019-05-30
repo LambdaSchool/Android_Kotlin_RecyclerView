@@ -11,8 +11,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val gson = Gson()
-        val pokemon = gson.fromJson(jsonString, Pokemon::class.java)
-        val i = 0
+        val pokemonDao = PokemonApiDao()
+        Thread(Runnable {
+            val allPokemon = pokemonDao.allPokemon
+            val i = 0
+        }).start()
     }
 }
 
